@@ -13,8 +13,9 @@ const interpolColor = (value) => {
 
 window.addEventListener("click", () => {
     const commentElement = document.querySelector('div.comment');
-    const re = /\(\s*([0-9]+)\s*\/\s*([0-9]+)\s*\)\s*\:/g;
+    const re = /\:\s*([0-9])+\s*\/\s*([0-9]+)|\(\s*([0-9])+\s*\/\s*([0-9]+)\s*\)\s*\:/g
     let theirs = 0;
+    let ours = 0;
 
     const myDiv = document.querySelector('aside.zizi-bar')
     if (myDiv)
@@ -31,16 +32,19 @@ window.addEventListener("click", () => {
     const noteContent = noteDiv.textContent.replace('Note : ', '').trim();
     noteDiv.textContent = "";
 
-    const lines = commentElement.innerHTML.split(/\r?\n|\r|\n/g);
-    lines.forEach((e) => {
-        const t = re.exec(e);
-        if (t == null)
-            return;
-        theirs += Number(t[2])
-    })
+    while ((t = re.exec(commentElement.textContent)) !== null) {
+        if (t[1] && t[2]) {
+            ours += Number(t[1])
+            theirs += Number(t[2])
+        } else if (t[3] && t[4]) {
+            ours += Number(t[3])
+            theirs += Number(t[4])
+        }
+    }
 
-    const percentage = Number(noteContent) / theirs;
-    console.log(Number(noteContent) / theirs, theirs);
+    const realNote = Math.max(ours, Number(noteContent));
+    const percentage = realNote / theirs;
+    console.log(percentage, ours + " vs " + noteContent + " = " + realNote, theirs);
 
     noteDiv.style.display = "flex";
     // noteDiv.style.justifyContent = "space-between";
