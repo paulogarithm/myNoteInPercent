@@ -1,0 +1,23 @@
+{
+    "name": "My Note Percentages",
+    "description": "With another name: zizi-bar",
+    "version": "4.2.0",
+    "manifest_version": 3,
+    "permissions": [
+      "activeTab"
+    ],
+    "host_permissions": [
+      "https://intra.epitech.eu/*"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": ["https://intra.epitech.eu/*"],
+        "js": ["zizi.js"],
+        "css": ["zizi.css"]
+      }
+    ]
+  }
+  
