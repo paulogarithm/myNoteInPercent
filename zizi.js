@@ -13,7 +13,7 @@ const interpolColor = (value) => {
 
 window.addEventListener("click", () => {
     const commentElement = document.querySelector('div.comment');
-    const re = /\:\s*([0-9])+\s*\/\s*([0-9]+)|\(\s*([0-9])+\s*\/\s*([0-9]+)\s*\)\s*\:/g
+    const re = /\:\s*(\-?[0-9])+\s*\/\s*([0-9]+)|\(\s*(\-?[0-9])+\s*\/\s*([0-9]+)\s*\)\s*\:/g
     let theirs = 0;
     let ours = 0;
 
